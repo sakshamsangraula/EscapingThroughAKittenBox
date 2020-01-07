@@ -3,7 +3,7 @@ package escapingkittenbox;
 public class EscapingKittenBox {
 	public static void main (String[] args)
 	{
-	// make a new KittenBox object and call the constructor of KittenBox class
+	  // make a new KittenBox object and call the constructor of KittenBox class
 		new KittenBox();
 	}
 }
