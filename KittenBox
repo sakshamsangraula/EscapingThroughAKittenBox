@@ -2,6 +2,9 @@ package kittenbox;
 
 import java.util.ArrayList;
 
+// In this class, the instance variables are initialized and play method is implemented which simulates 200 kittens moving around the kittenbox
+// and escaping after reaching the exit square
+
 public class KittenBox {
     
     ArrayList<Kitten> kitten;
@@ -13,7 +16,8 @@ public class KittenBox {
     private int exit = 54;
     private int numKittens = 200;
 
-    public KittenBox() {  // KittenBox constructor
+    // KittenBox constructor
+    public KittenBox() {  
 
     	
     	// Initialize the kitten Arraylist and add kitten objects to the arraylist
@@ -33,9 +37,8 @@ public class KittenBox {
 
     
     // This method will simulate escaping of 200 kittens where the kittens will
-    // move randomly in the kittenbox (by calling the move method in Kitten class) 
+    // move randomly in the KittenBox (by calling the move method in Kitten class) 
     // until they reach the exit square and escape
-    int escaped = 0;
     private void play() {
 
         int square, numMoves = 0;
@@ -61,15 +64,16 @@ public class KittenBox {
             		// exit square then remove the kitten from the ArrayList
             		// (the kitten escapes)
             		
-            		if(square == exit)
-            		{
-            			kitten.remove(i);
-            			escaped++;
-            		}
-            		
             		// increment the table array by 1 where the index is the new
             		// location of the kitten
             		table[square]++;
+            		
+            		if(square == exit)
+            		{
+            			kitten.remove(i);
+            		}
+            		
+            	
             	}
                 
                 
@@ -80,8 +84,7 @@ public class KittenBox {
             // how many kittens are still remaining
             box.updateGUI(table);
             numMoves++;
-            System.out.println(kitten.size() + " kittens remaining after " + numMoves + " moves."
-            		+ " and " + escaped + " kittens have escaped.");
+            System.out.println(kitten.size() + " kittens remaining after " + numMoves + " moves.");
         }
         
         // print out a message saying all the kittens have escaped after
