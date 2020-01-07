@@ -1,4 +1,4 @@
-package sxs3122lab10;
+package boxgui;
 
 import java.awt.*;
 import javax.swing.*;
