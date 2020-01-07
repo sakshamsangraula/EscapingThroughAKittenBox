@@ -1,0 +1,93 @@
+package kittenbox;
+
+import java.util.ArrayList;
+
+public class KittenBox {
+    
+    ArrayList<Kitten> kitten;
+    BoxGUI box;
+    private int numRows = 8;
+    private int numCols = 8;
+    private int startRow = 1;
+    private int startCol = 1;
+    private int exit = 54;
+    private int numKittens = 200;
+
+    public KittenBox() {  // KittenBox constructor
+
+    	
+    	// Initialize the kitten Arraylist and add kitten objects to the arraylist
+    	kitten = new ArrayList<>();
+    	
+    	for(int i=0; i<numKittens; i++)
+    	{
+    		// call the Kitten constructor of class Kitten with the new keyword and 
+    		// specific arguments to add kittens to the arraylist
+    		kitten.add(new Kitten(numRows, numCols, startRow, startCol));
+    	}
+        
+    	// instantiate the BOXGUI object and call the play method
+        box = new BoxGUI(numRows, numCols, (startRow * numCols + startCol), exit, numKittens);
+        play();
+    }
+
+    
+    // This method will simulate escaping of 200 kittens where the kittens will
+    // move randomly in the kittenbox (by calling the move method in Kitten class) 
+    // until they reach the exit square and escape
+    int escaped = 0;
+    private void play() {
+
+        int square, numMoves = 0;
+        while (kitten.size() > 0)  // this makes sure that the loop keeps 
+        	// going until all the kittens have escaped
+        {
+        	// this is needed for BoxGUI
+            int[] table = new int[numRows * numCols]; 
+
+            // Inner loop that loops once through your ArrayList getting each 
+            // Kitten object's new location (square).
+            {
+            	
+           // Loop through the ArrayList and set square to kitten.move() method
+           // call which returns an int representing the kitten's new location(square)
+           // in the kittenbox
+            	
+            	for(int i=0; i<kitten.size(); i++)
+            	{
+            		square = kitten.get(i).move();
+            		
+            		// if the new square that the kitten moved to is the 
+            		// exit square then remove the kitten from the ArrayList
+            		// (the kitten escapes)
+            		
+            		if(square == exit)
+            		{
+            			kitten.remove(i);
+            			escaped++;
+            		}
+            		
+            		// increment the table array by 1 where the index is the new
+            		// location of the kitten
+            		table[square]++;
+            	}
+                
+                
+            }
+            
+            // update the GUI, increase the numMoves by 1 each time the 
+            // kittens move and print out the size of the kitten to show
+            // how many kittens are still remaining
+            box.updateGUI(table);
+            numMoves++;
+            System.out.println(kitten.size() + " kittens remaining after " + numMoves + " moves."
+            		+ " and " + escaped + " kittens have escaped.");
+        }
+        
+        // print out a message saying all the kittens have escaped after
+        // all the kittens have escaped
+        box.updateGUI(new int[numRows * numCols]);
+        System.out.println("All kittens have escaped.");
+
+    }
+}
