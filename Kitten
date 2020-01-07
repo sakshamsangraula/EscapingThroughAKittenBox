@@ -1,0 +1,184 @@
+package kitten;
+
+class Kitten {
+    
+    private int numRows, numCols;
+    private int currRow, currCol;
+
+    public Kitten(int numRows, int numCols, int row, int col) {
+    // initialize the instance variables with the arguments passed
+    	this.numRows = numRows;
+    	this.numCols = numCols;
+    	this.currRow = row;
+    	this.currCol = col;
+        
+    }
+
+    /**
+     * Implement the move method that returns the location (square) the kitten 
+     * has moved to. 
+     * 
+     * Your kittens will move in a random direction (up, down, left, or right) 
+     * by 1 square. Return the integer value of the new square. Check your 
+     * boundary conditions since a kitten cannot move through walls. For 
+     * example; A 4x4 box would contain the following squares. 
+     *  0  1  2  3 
+     *  4  5  6  7 
+     *  8  9 10 11 
+     * 12 13 14 15 
+     * A kitten in square 11 could only move up, down, or left (not right). 
+     * A kitten in square 13 could only move left, up, or right (not down). 
+     * A kitten in square 0 could only move right or down (not left or up).
+     *
+     * Return the the kitten's new square as a single integer using the formula,
+     * currRow * numCols + numCols
+     */
+    public int move() {
+    		
+    	// check the 4 edges of the numRows * numCols KittenBox to prevent
+    	// going out of the boundaries. 
+    	
+    	
+    	// if the kitten is in the top left edge square then 
+    	// generate an integer 0 or 1 randomly (as there are only 2 places)
+    	// this kitten can move and then use conditional statements to 
+    	// move the kitten according to the result of calling random function
+    	
+    	if(currRow == 0 && currCol==0)
+    	{
+    		int randNum = (int) (Math.random()*2);
+    		// move to the right by 1 if randNum is 0 and move down by 1 if it is 1
+    		if(randNum == 0)
+    		{
+    			currCol++;
+    		}
+    		else {
+    			currRow++;
+    		}
+    	}
+    	// this prevents going out of boundary for top right edge square
+    	else if(currRow == 0 && currCol==numRows-1)
+    	{
+    		int randNum = (int) (Math.random()*2);
+    		// move to the left by 1 if randNum is 0 and move down by 1 if it is 1
+    		if(randNum == 0)
+    		{
+    			currCol--;
+    		}
+    		else {
+    			currRow++;
+    		}
+    	}
+    	// this prevents going out of boundary for bottom left edge square
+    	else if(currRow == numRows-1 && currCol==0)
+    	{
+    		int randNum = (int) (Math.random()*2);
+    		// move to the right by 1 if randNum is 0 and move up by 1 if it is 1
+    		if(randNum == 0)
+    		{
+    			currCol++;
+    		}
+    		else {
+    			currRow--;
+    		}
+    	}
+    		// this prevents going out of boundary for bottom right edge square
+        	else if(currRow == numRows-1 && currCol==numCols-1)
+        	{
+        		int randNum = (int) (Math.random()*2);
+        		// move to the left by 1 if randNum is 0 and move up by 1 if it is 1
+        		if(randNum == 0)
+        		{
+        			currCol--;
+        		}
+        		else {
+        			currRow--;
+        		}
+    	}
+    	
+    	// For the series of rows and columns at the edge, there are 3 ways
+    	// for the kittens to move (only 2 for the corners but that is already
+    	// checked by the conditionals above)
+    	
+    	
+    	// this conditional checks for the topmost row
+        	else if(currRow == 0)
+    	{
+    		// generate a random num either 0, 1, or 2
+    		int randNum = (int) (Math.random()*3);
+    		if(randNum==0)
+    		{
+    			currCol++;
+    		}
+    		else if(randNum == 1)
+    		{
+    			currCol--;
+    		}
+    		else {
+    			currRow++;
+    		}
+    	}
+    	// this conditional checks for the row at the very bottom
+    	else if(currRow == numRows-1)
+    	{
+    		// generate a random num either 0, 1, or 2
+    		int randNum = (int) (Math.random()*3);
+    		if(randNum==0)
+    		{
+    			currCol++;
+    		}
+    		else if(randNum == 1)
+    		{
+    			currCol--;
+    		}
+    		else {
+    			currRow--;
+    		}
+    	}
+
+    	// this conditional checks for the very first column
+    	else if(currCol == 0)
+    	{
+    		// generate a random num either 0, 1, or 2
+    		int randNum = (int) (Math.random()*3);
+    		if(randNum==0)
+    		{
+    			currRow++;
+    		}
+    		else if(randNum == 1)
+    		{
+    			currRow--;
+    		}
+    		else {
+    			currCol++;
+    		}
+    	}
+    	
+    	// this conditional checks for the very last column
+    	else if(currCol == numCols-1)
+    	{
+    		// generate a random num either 0, 1, or 2
+    		int randNum = (int) (Math.random()*3);
+    		if(randNum==0)
+    		{
+    			currRow++;
+    		}
+    		else if(randNum == 1)
+    		{
+    			currRow--;
+    		}
+    		else {
+    			currCol--;
+    		}
+    	}
+    	
+    	else {
+    		// if the kitten is in a square where there are other squares in all 4
+    		// directions then generate a random number between 0 and 3 inclusive
+    		// and move the kittens accordingly
+    	}
+
+    	// return the kitten's new square location as a single integer
+        return currRow * numCols + numCols;
+    }
+}
