@@ -1,7 +1,11 @@
 package kitten;
 
+// In this class, the instance variables are initialized and the move method is implemented to return the integer value of the new square
+// that the kitten moved to
+
 class Kitten {
     
+	// declare private instance variables
     private int numRows, numCols;
     private int currRow, currCol;
 
@@ -13,25 +17,17 @@ class Kitten {
     	this.currCol = col;
         
     }
-
-    /**
-     * Implement the move method that returns the location (square) the kitten 
-     * has moved to. 
-     * 
-     * Your kittens will move in a random direction (up, down, left, or right) 
-     * by 1 square. Return the integer value of the new square. Check your 
-     * boundary conditions since a kitten cannot move through walls. For 
-     * example; A 4x4 box would contain the following squares. 
-     *  0  1  2  3 
-     *  4  5  6  7 
-     *  8  9 10 11 
-     * 12 13 14 15 
-     * A kitten in square 11 could only move up, down, or left (not right). 
-     * A kitten in square 13 could only move left, up, or right (not down). 
-     * A kitten in square 0 could only move right or down (not left or up).
-     *
-     * Return the the kitten's new square as a single integer using the formula,
-     * currRow * numCols + numCols
+    
+    /* In this method, kittens move in a random direction (left, right, up, or down) by 1 square. 
+     * This method returns the integer value of the new square using the formula, currRow*numCols + numCols
+     * This method also checks to make sure that kittens do not go out of the boundary specified
+     * For example- A 3x3 box containing the following squares,
+     * 0 1 2
+     * 3 4 5
+     * 6 7 8
+     * A kitten in square 0 can only move right or down (not up or left). 
+     * A kitten in square 7 can only move left, right, or up (not down)
+     * However, the kitten in square 4 can move in all 4 directions (up, down, left, right)
      */
     public int move() {
     		
@@ -57,7 +53,7 @@ class Kitten {
     		}
     	}
     	// this prevents going out of boundary for top right edge square
-    	else if(currRow == 0 && currCol==numRows-1)
+    	else if(currRow == 0 && currCol==numCols-1)
     	{
     		int randNum = (int) (Math.random()*2);
     		// move to the left by 1 if randNum is 0 and move down by 1 if it is 1
@@ -175,10 +171,27 @@ class Kitten {
     	else {
     		// if the kitten is in a square where there are other squares in all 4
     		// directions then generate a random number between 0 and 3 inclusive
-    		// and move the kittens accordingly
+    		// and move the kittens accordingly to all 4 directions(up,down,left,right)
+    		
+    		int direction = (int) (Math.random()*4);
+    		if(direction==0)
+    		{
+    			currRow--;
+    		}
+    		else if(direction == 1)
+    		{
+    			currRow++;
+    		}
+    		else if(direction == 2)
+    		{
+    			currCol--;
+    		}
+    		else if(direction == 3) {
+    			currCol++;
+    		}
     	}
 
-    	// return the kitten's new square location as a single integer
-        return currRow * numCols + numCols;
+    	// return the kitten's new square location as a single integer with the given formula
+        return currRow * numCols + currCol;
     }
 }
